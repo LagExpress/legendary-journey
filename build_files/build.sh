@@ -19,6 +19,20 @@ dnf5 install -y tmux @cosmic-desktop @cosmic-desktop-apps
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
 
+#### Flatpak Installation
+
+mkdir -p /etc/ublue-os
+
+# Read from your repository layout folder structure and pipe it to the OS tracking list
+if [ -f /tmp/repo_files/flatpaks ]; then
+    cp /tmp/repo_files/flatpaks /etc/ublue-os/system-flatpaks.list
+fi
+
+#### System Configuration
+
+# Enforce system-wide fallback symlink for terminal shortcuts to utilize COSMIC terminal emulator natively
+ln -sf /usr/bin/cosmic-terminal /usr/bin/x-terminal-emulator
+
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
