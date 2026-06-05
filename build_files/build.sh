@@ -36,3 +36,13 @@ ln -sf /usr/bin/cosmic-terminal /usr/bin/x-terminal-emulator
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
+
+# Setup brew tap
+if [ -f /var/home/linuxbrew/.linuxbrew/bin/brew ]; then
+    /var/home/linuxbrew/.linuxbrew/bin/brew tap ublue-os/tap
+fi
+
+# Ensure docker group exists for devcontainers
+if ! grep -q "^docker:" /etc/group; then
+    groupadd docker || true
+fi
