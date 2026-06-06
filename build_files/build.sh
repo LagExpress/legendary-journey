@@ -36,3 +36,10 @@ ln -sf /usr/bin/cosmic-terminal /usr/bin/x-terminal-emulator
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
+
+
+# Ensure docker group exists for devcontainers
+
+if ! grep -q "^docker:" /etc/group; then
+    groupadd docker || true
+fi
